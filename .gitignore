@@ -1,0 +1,64 @@
+# vs 관련
+/.vsconfig
+/.vs
+
+# 대용량 에셋 제외(Block)
+Assets/Map/MapData/MapTexture/
+
+# 유니티 엔진이 자동 생성하는 캐시 및 임시 폴더 (절대 깃허브에 올리지 않음)
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Mm]emoryCaptures/
+/[Uu]ser[Ss]ettings/
+
+# 유니티 빌드 결과물 (용량이 크므로 제외)
+*.apk
+*.aab
+*.unitypackage
+*.app
+*.exe
+*.dll
+
+# 메타파일 충돌 방지 (.meta는 반드시 올려야 하지만, 임시 폴더의 메타는 제외)
+/[Ll]ibrary/**/*.meta
+/[Tt]emp/**/*.meta
+/[Oo]bj/**/*.meta
+/[Bb]uild/**/*.meta
+
+# OS 자체 생성 파일 (Mac, Windows)
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# 기타 텍스트 편집기 및 개발 환경 캐시
+.idea/
+.vscode/
+*.csproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# 유니티 크래시 리포트
+sysinfo.txt
+
+# 유니티 3D 패키지 매니저
+/[Pp]ackages/manifest.json
+/[Pp]ackages/packages-lock.json
