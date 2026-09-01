@@ -10,7 +10,7 @@ public class MapData
 
     //Map Data Array
     public int[,] worldMapArray;    //World Map
-    public int[,] fieldArray;       //Player Field
+    public int[,] fieldMapArray;       //Player Field
     public int[,] structureArray;   //Structure on Field
 
     //Generator

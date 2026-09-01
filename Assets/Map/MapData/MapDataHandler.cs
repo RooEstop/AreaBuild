@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public static class MapDataHandler
 {
     //Mask value to get Block Info
