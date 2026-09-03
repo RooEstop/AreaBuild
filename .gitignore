@@ -4,6 +4,7 @@
 
 # 대용량 에셋 제외(Block)
 Assets/Map/MapData/MapTexture/
+Assets/StreamingAssets/
 
 # 유니티 엔진이 자동 생성하는 캐시 및 임시 폴더 (절대 깃허브에 올리지 않음)
 /[Ll]ibrary/
@@ -62,3 +63,6 @@ sysinfo.txt
 # 유니티 3D 패키지 매니저
 /[Pp]ackages/manifest.json
 /[Pp]ackages/packages-lock.json
+
+# 예외사항들
+GameLogo.png
