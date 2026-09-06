@@ -1,4 +1,3 @@
-using NUnit.Framework.Constraints;
 using System;
 using UnityEngine;
 
@@ -10,12 +9,12 @@ public class MapData
     public int height;
 
     //Map Data Array
-    public int[] worldMapArray;    //World Map
+    public int[] worldMapArray;       //World Map
     public int[] fieldMapArray;       //Player Field
-    public int[] structureArray;   //Structure on Field
+    public int[] structureArray;      //Structure on Field
 
     /// <summary>
-    /// Generator.
+    /// Initialize map.
     /// </summary>
     /// <param name="w"> Width of map </param>
     /// <param name="h"> Height of map </param>

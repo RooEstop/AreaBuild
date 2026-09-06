@@ -16,7 +16,7 @@ MonoBehaviour:
   defaultOcean: 0
   defaultDirt: 0
   defaultStone: 0
-  waterThreshold: -0.3
+  waterThreshold: 0.1
   dirtThreshold: 0.7
   stoneThreshold: 1
   mountainThreshold: 0.9
