@@ -1,4 +1,3 @@
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -21,6 +20,28 @@ public class MapRenderer : MonoBehaviour
 
     public void RenderField(MapData map)
     {
-        MapFunctions.DrawField(map, fieldTileMap);
+        int width = map.width;
+        int height = map.height;
+        Vector3Int[] tilePosition = new Vector3Int[width * height];
+        TileBase[] tile = new TileBase[width * height];
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                int index = y * width + x;
+                int tileBit = map.fieldMapArray[BlockCodec.GetIndex(x, y, width)];
+                int tileID = BlockCodec.GetBlockID(tileBit);
+
+                tilePosition[index] = new Vector3Int(x, -y, 0);
+
+                if (BlockDatabase.tileTexture[tileID] == null)
+                    Debug.Log($"MapFunctions: Render Fail. No Texture Matched");
+
+                tile[index] = BlockDatabase.tileTexture[tileID];
+
+            }
+        }
+        fieldTileMap.SetTiles(tilePosition, tile);
     }
 }

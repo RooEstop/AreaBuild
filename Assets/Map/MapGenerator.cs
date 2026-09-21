@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    //만약 테스트가 다 끝나면, FieldSettingData로 옮기는 것이 좋음
     [Header("노이즈 세부 설정")]
     public float scale = 30f;
     [Header("노이즈 세부 설정")]
@@ -21,7 +22,7 @@ public class MapGenerator : MonoBehaviour
         
     }
 
-    public MapData FieldGenerate(MapData map, FieldSettingData fieldSetting)
+    public MapData GenerateFieldMap(MapData map, FieldSettingData fieldSetting)
     {
         System.Random random = new System.Random();
         int[] seed = new int[2] { random.Next(-10000, 10000), random.Next(-10000, 10000) };

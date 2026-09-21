@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     void MakeField()
     {
-        mapGeneratorInstance.FieldGenerate(currentMapData, currentBiome);
+        mapGeneratorInstance.GenerateFieldMap(currentMapData, currentBiome);
     }
 
     void RenderField()

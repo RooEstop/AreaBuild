@@ -44,7 +44,7 @@ public class MapFunctions
 
                 //Setting Status bit (0x00 ---- --)
                 if (multiOctv > fieldSetting.mountainThreshold) map[index] |= BlockCodec.upperBlockExistCode;  //Mountain
-
+           
             }
         }
     }
@@ -56,32 +56,6 @@ public class MapFunctions
         return randomLoc;
     }
 
-    public static void DrawField(MapData map, Tilemap tileMap)
-    {
-        int width = map.width;
-        int height = map.height;
-        Vector3Int[] tilePosition = new Vector3Int[width * height];
-        TileBase[] tile = new TileBase[width * height];
-
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                int index = y * width + x;
-                int tileBit = map.fieldMapArray[BlockCodec.GetIndex(x, y, width)];
-                int tileID = BlockCodec.GetBlockID(tileBit);
-
-                tilePosition[index] = new Vector3Int(x, -y, 0);
-
-                if (BlockDatabase.tileTexture[tileID] == null)
-                    Debug.Log($"MapFunctions: Render Fail. No Texture Matched");
-              
-                tile[index] = BlockDatabase.tileTexture[tileID];
-                
-            }
-        }
-        tileMap.SetTiles(tilePosition, tile);
-    }
 }
 
 
