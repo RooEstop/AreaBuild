@@ -8,17 +8,17 @@ public static class BlockCodec
     public const int pathCostMask =   0x00F00000;
     public const int statusMask =     0x7F000000;
 
-    //Shift bit for encode
+    // Shift bit for encode
     public const int durabilityShift = 8;
     public const int pathCostShift =   20;
     public const int statusShift =     24;
 
-    //Block landscape code
+    // Tile landscape code
     public const int oceanCode = 0x00;
     public const int dirtCode =  0x10;
     public const int stoneCode = 0x20;
 
-    //Block Status code
+    // Tile Status code
     public const int upperBlockExistCode =  0x40000000;
     public const int fertilityCode =        0x20000000;
     public const int speedCode =            0x10000000;
@@ -26,6 +26,13 @@ public static class BlockCodec
     public const int conductivityCode =     0x04000000;
     public const int floodabilityCode =     0x02000000;
     public const int flammabilityCode =     0x01000000;
+
+    // Structure ID Bit
+    public const int stoneMountainCode = 0x01;
+
+    // Structure Status Code
+    public const int naturalSpawnedCode = 0x20000000;
+    public const int BlockingCode = 0x10000000;         // 0 -> Open, 1 -> Closed
 
 
     public static int GetBlockID(int block) => (block & blockIDMask);

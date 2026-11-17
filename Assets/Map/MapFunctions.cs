@@ -1,6 +1,4 @@
-using UnityEngine;
 using Unity.Mathematics;
-using UnityEngine.Tilemaps;
 
 public class MapFunctions
 {
@@ -15,7 +13,7 @@ public class MapFunctions
     /// <param name="lacunarity"> determine how noise is density </param>
     /// <param name="persistance"> determine effect of SubOctv </param>
     /// <param name="fieldSetting"> Threshold for River / Land / Mountain </param>
-    public static void MultiOctave(int[] seed, int[] map, int width, int height, float scale, float lacunarity, float persistance, FieldSettingData fieldSetting)
+    public static void MultiOctave(int[] seed, MapData map, int width, int height, float scale, float lacunarity, float persistance, FieldSettingData fieldSetting)
     {
         float maxOctv = 1f + (persistance) + (persistance * persistance);
         for (int x = 0; x < width; x++) {
@@ -40,11 +38,17 @@ public class MapFunctions
                 else if (multiOctv < fieldSetting.dirtThreshold)  blockID = BlockCodec.dirtCode + fieldSetting.defaultDirt;   //Land(Plain)
                 else                                              blockID = BlockCodec.stoneCode + fieldSetting.defaultStone;  //Stone
 
-                map[index] = BlockCodec.BlockEncode(blockID);
+                map.fieldMapArray[index] = BlockCodec.BlockEncode(blockID);
 
-                //Setting Status bit (0x00 ---- --)
-                if (multiOctv > fieldSetting.mountainThreshold) map[index] |= BlockCodec.upperBlockExistCode;  //Mountain
-           
+                // Setting Status bit (0x00 ---- --)
+                // And set mountain - structure array
+                if (multiOctv > fieldSetting.mountainThreshold)
+                {
+                    map.fieldMapArray[index] |= BlockCodec.upperBlockExistCode;  //Mountain
+
+                    blockID = BlockCodec.stoneMountainCode;
+                    map.structureArray[index] = BlockCodec.BlockEncode(blockID);  //Mountain
+                }
             }
         }
     }

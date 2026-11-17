@@ -1,4 +1,3 @@
-using Mono.Cecil;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +14,8 @@ public enum StateType
     MoveSpeedRate,
     AttackSpeedRate,
     JobSpeedRate,
+
+    HungerFullToEmpty,
 }
 
 public class Pawn

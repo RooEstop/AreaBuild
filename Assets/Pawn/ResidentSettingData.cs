@@ -19,8 +19,11 @@ public class ResidentSettingData : ScriptableObject
     public float baseHumanityRate = 1f;
     public float baseMoodRate = 1f;
 
+    //Adjust ability rate
     public float baseDefenseRate = 1f;
     public float baseMoveSpeedRate = 1f;
     public float baseAttackSpeedRate = 1f;
     public float baseJobSpeedRate = 1f;
+
+    public float HungerFullToEmptySeconds = 600f;
 }

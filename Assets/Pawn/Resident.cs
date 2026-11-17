@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Resident : Pawn
 {
-    public float humanity;
+    public float humanity;                  
 
     //ScriptableObject
     public List<Trait> traits;
@@ -12,13 +12,6 @@ public class Resident : Pawn
     public Resident(Vector2 spawnPosition, ResidentSettingData setting, List<Trait> innateTraits) 
     {
         position = spawnPosition;
-
-        healthPoint = setting.MaxHealthPoint;
-        manaPoint = setting.maxManaPoint;
-
-        hunger = setting.maxHunger;
-        humanity = setting.maxHumanity / 2;
-        mood = setting.maxMood;
 
         //initialize baseState
         InitBaseState(setting);
@@ -28,6 +21,13 @@ public class Resident : Pawn
 
         //Apply Traits
         ApplyTrait();
+
+        healthPoint = setting.MaxHealthPoint * modifiedState[StateType.HealthPoint];
+        manaPoint = setting.maxManaPoint * modifiedState[StateType.ManaPoint];
+
+        hunger = setting.maxHunger;
+        humanity = setting.maxHumanity / 2;
+        mood = setting.maxMood;
     }
 
     protected void InitBaseState(ResidentSettingData setting)
@@ -41,6 +41,8 @@ public class Resident : Pawn
         baseState[StateType.MoveSpeedRate] = setting.baseMoveSpeedRate;
         baseState[StateType.AttackSpeedRate] = setting.baseAttackSpeedRate;
         baseState[StateType.JobSpeedRate] = setting.baseJobSpeedRate;
+
+        baseState[StateType.HungerFullToEmpty] = setting.maxHunger / setting.HungerFullToEmptySeconds;
     }
 
     public void ApplyTrait()
@@ -63,7 +65,7 @@ public class Resident : Pawn
 
     public void UpdateHunger(float deltaTime)
     {
-        hunger -= modifiedState[StateType.HungerRate] * 0.166f * deltaTime;
+        hunger -= modifiedState[StateType.HungerRate] * modifiedState[StateType.HungerFullToEmpty] * deltaTime;
     }
 
 

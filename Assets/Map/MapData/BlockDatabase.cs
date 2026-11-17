@@ -1,25 +1,18 @@
 using UnityEngine;
 using System.IO;
-using System.ComponentModel;
 using System;
 using UnityEngine.Tilemaps;
 
-public struct TileObject
+public struct BlockObject
 {
-    public int tileBit;
-    public string tileName;
-}
-
-public struct StructureObject
-{
-    public int structureBit;
-    public string structureName;
+    public int blockBit;
+    public string blockName;
 }
 
 public static class BlockDatabase
 {
-    public static TileObject[] tileObjectData = new TileObject[256];
-    public static StructureObject[] structureObjectData = new StructureObject[256];
+    public static BlockObject[] tileObjectData = new BlockObject[256];
+    public static BlockObject[] structureObjectData = new BlockObject[256];
 
     public static TileBase[] tileTexture = new TileBase[256];
     public static TileBase[] structureTexture = new TileBase[256];
@@ -30,10 +23,12 @@ public static class BlockDatabase
     public static void InitDatabase()
     {
         string tileDataFileName = "TileData.csv";
-        //string structureDataFileName = 
+        string structureDataFileName = "StructureData.csv";
 
-        ReadCSV(tileDataFileName);
+        ReadCSV(tileDataFileName, tileObjectData);
+        ReadCSV(structureDataFileName, structureObjectData);
         InitTileBase();
+        InitStructureBase();
 
         Debug.Log("Block Data Base Initialized.");
     }
@@ -42,9 +37,19 @@ public static class BlockDatabase
     {
         for (int i = 0; i < 256; i++) 
         {
-            if (string.IsNullOrEmpty(tileObjectData[i].tileName))   continue;
+            if (string.IsNullOrEmpty(tileObjectData[i].blockName))   continue;
                 
-            tileTexture[i] = Resources.Load<TileBase>(tileObjectData[i].tileName);
+            tileTexture[i] = Resources.Load<TileBase>(tileObjectData[i].blockName);
+        }
+    }
+
+    public static void InitStructureBase()
+    {
+        for (int i = 0; i < 256; i++)
+        {
+            if (string.IsNullOrEmpty(structureObjectData[i].blockName)) continue;
+
+            structureTexture[i] = Resources.Load<TileBase>(structureObjectData[i].blockName);
         }
     }
 
@@ -52,7 +57,7 @@ public static class BlockDatabase
     /// Find .csv file in Streaming Asset and copy data to TIle/Structure array.
     /// </summary>
     /// <param name="fileName"> File name to find </param>
-    public static void ReadCSV(string fileName)
+    public static void ReadCSV(string fileName, BlockObject[] objectList)
     {
         string directory = Application.streamingAssetsPath;
         string filePath = Path.Combine(directory, fileName);
@@ -70,10 +75,9 @@ public static class BlockDatabase
 
                     int index = Convert.ToInt32(csvData[0], 16);
                     if (csvData[4] == "") continue; //need to be fixed when csv is complete.
-                    else tileObjectData[index].tileName = csvData[4];
+                    else objectList[index].blockName = csvData[4];
 
-
-                    tileObjectData[index].tileBit = BlockCodec.BlockEncode(Convert.ToInt32(csvData[0], 16),
+                    objectList[index].blockBit = BlockCodec.BlockEncode(Convert.ToInt32(csvData[0], 16),
                                                                             Convert.ToInt32(csvData[1], 16),
                                                                             Convert.ToInt32(csvData[2], 16),
                                                                             Convert.ToInt32(csvData[3], 16));
